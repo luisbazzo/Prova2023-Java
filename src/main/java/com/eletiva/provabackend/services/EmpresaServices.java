@@ -29,5 +29,10 @@ public class EmpresaServices {
     public List<Empresas> getEmpresas() {
         return empresaRepository.findAll();
     }
+
+    public void deleteEmpresa(int id) {
+        Empresas empresa = getEmpresaById(id);
+        empresaRepository.delete(empresa);
+    }
     
 }
