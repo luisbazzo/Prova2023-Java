@@ -1,6 +1,7 @@
 package com.eletiva.provabackend.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,12 +25,6 @@ public class EmpresaController {
     @Autowired
     private EmpresaServices empresaServices;
 
-    @GetMapping("{id}")
-    public ResponseEntity<Empresas> getEmpresa(@PathVariable int id){
-        Empresas empresa = empresaServices.getEmpresaById(id);
-        return ResponseEntity.ok().body(empresa);
-    }
-
     @PostMapping
     public ResponseEntity<Empresas> saveEmpresa(@RequestBody Empresas empresa){
         Empresas novaEmpresa = empresaServices.saveEmpresas(empresa);
@@ -42,4 +37,17 @@ public class EmpresaController {
 
         return ResponseEntity.created(location).body(novaEmpresa);
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Empresas> getEmpresa(@PathVariable int id){
+        Empresas empresa = empresaServices.getEmpresaById(id);
+        return ResponseEntity.ok().body(empresa);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Empresas>> getEmpresas(){
+        List<Empresas> empresas = empresaServices.getEmpresas();
+        return ResponseEntity.ok().body(empresas);
+    }
+
 }

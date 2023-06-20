@@ -1,5 +1,7 @@
 package com.eletiva.provabackend.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +16,18 @@ public class EmpresaServices {
     @Autowired
     private EmpresaRepository empresaRepository;
 
+    public Empresas saveEmpresas(Empresas empresa) {
+        return empresaRepository.save(empresa);
+    }
+
     public Empresas getEmpresaById(int id) {
         return empresaRepository.findById(id).orElseThrow(
             () -> new EntityNotFoundException("Erro ao encontrar empresa")
         );
     }
 
-    public Empresas saveEmpresas(Empresas empresa) {
-        return empresaRepository.save(empresa);
+    public List<Empresas> getEmpresas() {
+        return empresaRepository.findAll();
     }
     
 }
